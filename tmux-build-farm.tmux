@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 source "$CURRENT_DIR/scripts/helpers.sh"
+
+gerrit_id=$(get_tmux_option "@farm_gerrit_id" "")
+if [ -z "$gerrit_id" ]; then
+    echo "Error: Please set gerrit ID using 'set -g @farm_gerrit_id \"your.id\"'"
+    exit 1
+fi
 
 # Define placeholders for different build statuses
 build_placeholders=(
